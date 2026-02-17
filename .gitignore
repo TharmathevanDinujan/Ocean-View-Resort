@@ -1,0 +1,12 @@
+# Ignore local tracking file
+commit_plan.md
+
+# Ignore IDE files
+.idea/
+*.iml
+target/
+*.class
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
