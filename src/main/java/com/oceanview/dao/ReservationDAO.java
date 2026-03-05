@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationDAO {
-    private static final String INSERT_RESERVATION_SQL = "INSERT INTO reservations (res_number, guest_name, address, contact_number, room_type, check_in, check_out, total_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_RESERVATION_SQL = "INSERT INTO reservations (res_number, guest_name, address, contact_number, room_type, check_in, check_out , total_cost) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_RESERVATION_BY_NUMBER = "SELECT * FROM reservations WHERE res_number = ?";
     private static final String SELECT_ALL_RESERVATIONS = "SELECT * FROM reservations";
 
@@ -71,5 +71,14 @@ public class ReservationDAO {
             }
         }
         return reservations;
+    }
+
+    public void deleteReservation(String resNumber) throws SQLException {
+        String DELETE_RESERVATION_SQL = "DELETE FROM reservations WHERE res_number = ?";
+        try (Connection connection = DBConnection.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_RESERVATION_SQL)) {
+            preparedStatement.setString(1, resNumber);
+            preparedStatement.executeUpdate();
+        }
     }
 }
